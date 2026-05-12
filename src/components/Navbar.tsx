@@ -15,7 +15,8 @@ const links = [
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
-  const { user, signOut, loading } = useAuth();
+  const { user, role, signOut, loading } = useAuth();
+  const dashboardPath = role === "admin" ? "/admin" : "/dashboard";
 
   async function handleSignOut() {
     await signOut();
@@ -55,10 +56,12 @@ export function Navbar() {
           <ThemeToggle />
           {!loading && user ? (
             <>
-              <span className="hidden sm:inline-flex h-10 items-center gap-2 rounded-full border border-border bg-card px-4 text-sm font-medium">
-                <UserIcon className="h-4 w-4" />
-                <span className="max-w-[140px] truncate">{user.email}</span>
-              </span>
+              <Link
+                to={dashboardPath}
+                className="hidden sm:inline-flex h-10 items-center gap-2 rounded-full border border-border bg-card px-4 text-sm font-medium hover:bg-muted transition"
+              >
+                <UserIcon className="h-4 w-4" /> Mon espace
+              </Link>
               <button
                 onClick={handleSignOut}
                 className="hidden sm:inline-flex h-10 items-center gap-1.5 rounded-full px-4 text-sm font-semibold text-primary-foreground gradient-hero-bg shadow-elegant hover:shadow-glow transition-all hover:scale-[1.03]"
