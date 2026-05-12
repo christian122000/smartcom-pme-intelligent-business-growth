@@ -45,15 +45,15 @@ function AdminHome() {
             <AreaChart data={traffic}>
               <defs>
                 <linearGradient id="gp" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity={0.4} />
-                  <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity={0} />
+                  <stop offset="0%" stopColor="var(--primary)" stopOpacity={0.4} />
+                  <stop offset="100%" stopColor="var(--primary)" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-              <XAxis dataKey="m" stroke="hsl(var(--muted-foreground))" fontSize={12} />
-              <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} />
-              <Tooltip contentStyle={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8 }} />
-              <Area type="monotone" dataKey="v" stroke="hsl(var(--primary))" fill="url(#gp)" strokeWidth={2} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+              <XAxis dataKey="m" stroke="var(--muted-foreground)" fontSize={12} />
+              <YAxis stroke="var(--muted-foreground)" fontSize={12} />
+              <Tooltip contentStyle={{ background: "var(--card)", border: "1px solid var(--border)", borderRadius: 8 }} />
+              <Area type="monotone" dataKey="v" stroke="var(--primary)" fill="url(#gp)" strokeWidth={2} />
             </AreaChart>
           </ResponsiveContainer>
         </motion.div>
@@ -62,11 +62,11 @@ function AdminHome() {
           <h2 className="font-semibold mb-4">Canaux populaires</h2>
           <ResponsiveContainer width="100%" height={260}>
             <BarChart data={campaigns}>
-              <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-              <XAxis dataKey="name" stroke="hsl(var(--muted-foreground))" fontSize={12} />
-              <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} />
-              <Tooltip contentStyle={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8 }} />
-              <Bar dataKey="v" fill="hsl(var(--primary))" radius={[6, 6, 0, 0]} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+              <XAxis dataKey="name" stroke="var(--muted-foreground)" fontSize={12} />
+              <YAxis stroke="var(--muted-foreground)" fontSize={12} />
+              <Tooltip contentStyle={{ background: "var(--card)", border: "1px solid var(--border)", borderRadius: 8 }} />
+              <Bar dataKey="v" fill="var(--primary)" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </motion.div>

@@ -5,8 +5,8 @@ export const Route = createFileRoute("/dashboard/analytics")({ component: A });
 
 const bars = [{ d: "Lun", v: 24 }, { d: "Mar", v: 38 }, { d: "Mer", v: 31 }, { d: "Jeu", v: 45 }, { d: "Ven", v: 62 }, { d: "Sam", v: 50 }, { d: "Dim", v: 28 }];
 const radial = [
-  { name: "WhatsApp", v: 82, fill: "hsl(var(--primary))" },
-  { name: "Email", v: 64, fill: "hsl(var(--accent))" },
+  { name: "WhatsApp", v: 82, fill: "var(--primary)" },
+  { name: "Email", v: 64, fill: "var(--accent)" },
   { name: "SMS", v: 48, fill: "#10b981" },
 ];
 
@@ -19,11 +19,11 @@ function A() {
           <h3 className="font-semibold mb-4">Engagement hebdomadaire</h3>
           <ResponsiveContainer width="100%" height={280}>
             <BarChart data={bars}>
-              <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-              <XAxis dataKey="d" stroke="hsl(var(--muted-foreground))" fontSize={12} />
-              <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} />
-              <Tooltip contentStyle={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8 }} />
-              <Bar dataKey="v" fill="hsl(var(--primary))" radius={[6, 6, 0, 0]} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+              <XAxis dataKey="d" stroke="var(--muted-foreground)" fontSize={12} />
+              <YAxis stroke="var(--muted-foreground)" fontSize={12} />
+              <Tooltip contentStyle={{ background: "var(--card)", border: "1px solid var(--border)", borderRadius: 8 }} />
+              <Bar dataKey="v" fill="var(--primary)" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
