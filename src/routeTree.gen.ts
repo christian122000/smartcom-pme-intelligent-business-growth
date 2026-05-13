@@ -22,6 +22,7 @@ import { Route as DashboardClientsRouteImport } from './routes/dashboard.clients
 import { Route as DashboardChatbotRouteImport } from './routes/dashboard.chatbot'
 import { Route as DashboardCampaignsRouteImport } from './routes/dashboard.campaigns'
 import { Route as DashboardAnalyticsRouteImport } from './routes/dashboard.analytics'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminPmesRouteImport } from './routes/admin.pmes'
@@ -94,6 +95,11 @@ const DashboardAnalyticsRoute = DashboardAnalyticsRouteImport.update({
   path: '/analytics',
   getParentRoute: () => DashboardRoute,
 } as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminUsersRoute = AdminUsersRouteImport.update({
   id: '/users',
   path: '/users',
@@ -137,6 +143,7 @@ export interface FileRoutesByFullPath {
   '/admin/pmes': typeof AdminPmesRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
+  '/api/chat': typeof ApiChatRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/campaigns': typeof DashboardCampaignsRoute
   '/dashboard/chatbot': typeof DashboardChatbotRoute
@@ -156,6 +163,7 @@ export interface FileRoutesByTo {
   '/admin/pmes': typeof AdminPmesRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
+  '/api/chat': typeof ApiChatRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/campaigns': typeof DashboardCampaignsRoute
   '/dashboard/chatbot': typeof DashboardChatbotRoute
@@ -178,6 +186,7 @@ export interface FileRoutesById {
   '/admin/pmes': typeof AdminPmesRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
+  '/api/chat': typeof ApiChatRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/campaigns': typeof DashboardCampaignsRoute
   '/dashboard/chatbot': typeof DashboardChatbotRoute
@@ -201,6 +210,7 @@ export interface FileRouteTypes {
     | '/admin/pmes'
     | '/admin/settings'
     | '/admin/users'
+    | '/api/chat'
     | '/dashboard/analytics'
     | '/dashboard/campaigns'
     | '/dashboard/chatbot'
@@ -220,6 +230,7 @@ export interface FileRouteTypes {
     | '/admin/pmes'
     | '/admin/settings'
     | '/admin/users'
+    | '/api/chat'
     | '/dashboard/analytics'
     | '/dashboard/campaigns'
     | '/dashboard/chatbot'
@@ -241,6 +252,7 @@ export interface FileRouteTypes {
     | '/admin/pmes'
     | '/admin/settings'
     | '/admin/users'
+    | '/api/chat'
     | '/dashboard/analytics'
     | '/dashboard/campaigns'
     | '/dashboard/chatbot'
@@ -257,6 +269,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   DashboardRoute: typeof DashboardRouteWithChildren
   ResetPasswordRoute: typeof ResetPasswordRoute
+  ApiChatRoute: typeof ApiChatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -351,6 +364,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/dashboard/analytics'
       preLoaderRoute: typeof DashboardAnalyticsRouteImport
       parentRoute: typeof DashboardRoute
+    }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/admin/users': {
       id: '/admin/users'
@@ -449,17 +469,8 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   DashboardRoute: DashboardRouteWithChildren,
   ResetPasswordRoute: ResetPasswordRoute,
+  ApiChatRoute: ApiChatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
