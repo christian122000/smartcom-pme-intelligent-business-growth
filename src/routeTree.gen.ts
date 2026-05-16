@@ -16,12 +16,14 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as DashboardSocialCampaignsRouteImport } from './routes/dashboard.social-campaigns'
 import { Route as DashboardSettingsRouteImport } from './routes/dashboard.settings'
 import { Route as DashboardNotificationsRouteImport } from './routes/dashboard.notifications'
 import { Route as DashboardClientsRouteImport } from './routes/dashboard.clients'
 import { Route as DashboardChatbotRouteImport } from './routes/dashboard.chatbot'
 import { Route as DashboardCampaignsRouteImport } from './routes/dashboard.campaigns'
 import { Route as DashboardAnalyticsRouteImport } from './routes/dashboard.analytics'
+import { Route as DashboardAiToolsRouteImport } from './routes/dashboard.ai-tools'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
@@ -66,6 +68,12 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
+const DashboardSocialCampaignsRoute =
+  DashboardSocialCampaignsRouteImport.update({
+    id: '/social-campaigns',
+    path: '/social-campaigns',
+    getParentRoute: () => DashboardRoute,
+  } as any)
 const DashboardSettingsRoute = DashboardSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -94,6 +102,11 @@ const DashboardCampaignsRoute = DashboardCampaignsRouteImport.update({
 const DashboardAnalyticsRoute = DashboardAnalyticsRouteImport.update({
   id: '/analytics',
   path: '/analytics',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardAiToolsRoute = DashboardAiToolsRouteImport.update({
+  id: '/ai-tools',
+  path: '/ai-tools',
   getParentRoute: () => DashboardRoute,
 } as any)
 const ApiChatRoute = ApiChatRouteImport.update({
@@ -151,12 +164,14 @@ export interface FileRoutesByFullPath {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/api/chat': typeof ApiChatRoute
+  '/dashboard/ai-tools': typeof DashboardAiToolsRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/campaigns': typeof DashboardCampaignsRoute
   '/dashboard/chatbot': typeof DashboardChatbotRoute
   '/dashboard/clients': typeof DashboardClientsRoute
   '/dashboard/notifications': typeof DashboardNotificationsRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/social-campaigns': typeof DashboardSocialCampaignsRoute
   '/admin/': typeof AdminIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
@@ -172,12 +187,14 @@ export interface FileRoutesByTo {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/api/chat': typeof ApiChatRoute
+  '/dashboard/ai-tools': typeof DashboardAiToolsRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/campaigns': typeof DashboardCampaignsRoute
   '/dashboard/chatbot': typeof DashboardChatbotRoute
   '/dashboard/clients': typeof DashboardClientsRoute
   '/dashboard/notifications': typeof DashboardNotificationsRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/social-campaigns': typeof DashboardSocialCampaignsRoute
   '/admin': typeof AdminIndexRoute
   '/dashboard': typeof DashboardIndexRoute
 }
@@ -196,12 +213,14 @@ export interface FileRoutesById {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/api/chat': typeof ApiChatRoute
+  '/dashboard/ai-tools': typeof DashboardAiToolsRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/campaigns': typeof DashboardCampaignsRoute
   '/dashboard/chatbot': typeof DashboardChatbotRoute
   '/dashboard/clients': typeof DashboardClientsRoute
   '/dashboard/notifications': typeof DashboardNotificationsRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/social-campaigns': typeof DashboardSocialCampaignsRoute
   '/admin/': typeof AdminIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
@@ -221,12 +240,14 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/users'
     | '/api/chat'
+    | '/dashboard/ai-tools'
     | '/dashboard/analytics'
     | '/dashboard/campaigns'
     | '/dashboard/chatbot'
     | '/dashboard/clients'
     | '/dashboard/notifications'
     | '/dashboard/settings'
+    | '/dashboard/social-campaigns'
     | '/admin/'
     | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
@@ -242,12 +263,14 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/users'
     | '/api/chat'
+    | '/dashboard/ai-tools'
     | '/dashboard/analytics'
     | '/dashboard/campaigns'
     | '/dashboard/chatbot'
     | '/dashboard/clients'
     | '/dashboard/notifications'
     | '/dashboard/settings'
+    | '/dashboard/social-campaigns'
     | '/admin'
     | '/dashboard'
   id:
@@ -265,12 +288,14 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/users'
     | '/api/chat'
+    | '/dashboard/ai-tools'
     | '/dashboard/analytics'
     | '/dashboard/campaigns'
     | '/dashboard/chatbot'
     | '/dashboard/clients'
     | '/dashboard/notifications'
     | '/dashboard/settings'
+    | '/dashboard/social-campaigns'
     | '/admin/'
     | '/dashboard/'
   fileRoutesById: FileRoutesById
@@ -335,6 +360,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/dashboard/social-campaigns': {
+      id: '/dashboard/social-campaigns'
+      path: '/social-campaigns'
+      fullPath: '/dashboard/social-campaigns'
+      preLoaderRoute: typeof DashboardSocialCampaignsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/settings': {
       id: '/dashboard/settings'
       path: '/settings'
@@ -375,6 +407,13 @@ declare module '@tanstack/react-router' {
       path: '/analytics'
       fullPath: '/dashboard/analytics'
       preLoaderRoute: typeof DashboardAnalyticsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/ai-tools': {
+      id: '/dashboard/ai-tools'
+      path: '/ai-tools'
+      fullPath: '/dashboard/ai-tools'
+      preLoaderRoute: typeof DashboardAiToolsRouteImport
       parentRoute: typeof DashboardRoute
     }
     '/api/chat': {
@@ -461,22 +500,26 @@ const AdminRouteChildren: AdminRouteChildren = {
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface DashboardRouteChildren {
+  DashboardAiToolsRoute: typeof DashboardAiToolsRoute
   DashboardAnalyticsRoute: typeof DashboardAnalyticsRoute
   DashboardCampaignsRoute: typeof DashboardCampaignsRoute
   DashboardChatbotRoute: typeof DashboardChatbotRoute
   DashboardClientsRoute: typeof DashboardClientsRoute
   DashboardNotificationsRoute: typeof DashboardNotificationsRoute
   DashboardSettingsRoute: typeof DashboardSettingsRoute
+  DashboardSocialCampaignsRoute: typeof DashboardSocialCampaignsRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardAiToolsRoute: DashboardAiToolsRoute,
   DashboardAnalyticsRoute: DashboardAnalyticsRoute,
   DashboardCampaignsRoute: DashboardCampaignsRoute,
   DashboardChatbotRoute: DashboardChatbotRoute,
   DashboardClientsRoute: DashboardClientsRoute,
   DashboardNotificationsRoute: DashboardNotificationsRoute,
   DashboardSettingsRoute: DashboardSettingsRoute,
+  DashboardSocialCampaignsRoute: DashboardSocialCampaignsRoute,
   DashboardIndexRoute: DashboardIndexRoute,
 }
 
