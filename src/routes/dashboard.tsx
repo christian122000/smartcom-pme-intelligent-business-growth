@@ -1,5 +1,5 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
-import { LayoutDashboard, Users, Megaphone, Bot, BarChart3, Bell, Settings } from "lucide-react";
+import { LayoutDashboard, Users, Megaphone, Bot, BarChart3, Bell, Settings, Sparkles, Share2 } from "lucide-react";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 
 export const clientNav = [
@@ -7,6 +7,8 @@ export const clientNav = [
   { title: "Mes clients", url: "/dashboard/clients", icon: Users },
   { title: "Campagnes", url: "/dashboard/campaigns", icon: Megaphone },
   { title: "Chatbot IA", url: "/dashboard/chatbot", icon: Bot },
+  { title: "Outils IA", url: "/dashboard/ai-tools", icon: Sparkles },
+  { title: "Réseaux sociaux", url: "/dashboard/social-campaigns", icon: Share2 },
   { title: "Analyses", url: "/dashboard/analytics", icon: BarChart3 },
   { title: "Notifications", url: "/dashboard/notifications", icon: Bell },
   { title: "Paramètres", url: "/dashboard/settings", icon: Settings },

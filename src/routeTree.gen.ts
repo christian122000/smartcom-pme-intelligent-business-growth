@@ -16,6 +16,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as DashboardSocialCampaignsRouteImport } from './routes/dashboard.social-campaigns'
 import { Route as DashboardSettingsRouteImport } from './routes/dashboard.settings'
 import { Route as DashboardNotificationsRouteImport } from './routes/dashboard.notifications'
 import { Route as DashboardClientsRouteImport } from './routes/dashboard.clients'
@@ -67,6 +68,12 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
+const DashboardSocialCampaignsRoute =
+  DashboardSocialCampaignsRouteImport.update({
+    id: '/social-campaigns',
+    path: '/social-campaigns',
+    getParentRoute: () => DashboardRoute,
+  } as any)
 const DashboardSettingsRoute = DashboardSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -164,6 +171,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/clients': typeof DashboardClientsRoute
   '/dashboard/notifications': typeof DashboardNotificationsRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/social-campaigns': typeof DashboardSocialCampaignsRoute
   '/admin/': typeof AdminIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
@@ -186,6 +194,7 @@ export interface FileRoutesByTo {
   '/dashboard/clients': typeof DashboardClientsRoute
   '/dashboard/notifications': typeof DashboardNotificationsRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/social-campaigns': typeof DashboardSocialCampaignsRoute
   '/admin': typeof AdminIndexRoute
   '/dashboard': typeof DashboardIndexRoute
 }
@@ -211,6 +220,7 @@ export interface FileRoutesById {
   '/dashboard/clients': typeof DashboardClientsRoute
   '/dashboard/notifications': typeof DashboardNotificationsRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/social-campaigns': typeof DashboardSocialCampaignsRoute
   '/admin/': typeof AdminIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
@@ -237,6 +247,7 @@ export interface FileRouteTypes {
     | '/dashboard/clients'
     | '/dashboard/notifications'
     | '/dashboard/settings'
+    | '/dashboard/social-campaigns'
     | '/admin/'
     | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
@@ -259,6 +270,7 @@ export interface FileRouteTypes {
     | '/dashboard/clients'
     | '/dashboard/notifications'
     | '/dashboard/settings'
+    | '/dashboard/social-campaigns'
     | '/admin'
     | '/dashboard'
   id:
@@ -283,6 +295,7 @@ export interface FileRouteTypes {
     | '/dashboard/clients'
     | '/dashboard/notifications'
     | '/dashboard/settings'
+    | '/dashboard/social-campaigns'
     | '/admin/'
     | '/dashboard/'
   fileRoutesById: FileRoutesById
@@ -346,6 +359,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
+    }
+    '/dashboard/social-campaigns': {
+      id: '/dashboard/social-campaigns'
+      path: '/social-campaigns'
+      fullPath: '/dashboard/social-campaigns'
+      preLoaderRoute: typeof DashboardSocialCampaignsRouteImport
+      parentRoute: typeof DashboardRoute
     }
     '/dashboard/settings': {
       id: '/dashboard/settings'
@@ -487,6 +507,7 @@ interface DashboardRouteChildren {
   DashboardClientsRoute: typeof DashboardClientsRoute
   DashboardNotificationsRoute: typeof DashboardNotificationsRoute
   DashboardSettingsRoute: typeof DashboardSettingsRoute
+  DashboardSocialCampaignsRoute: typeof DashboardSocialCampaignsRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
@@ -498,6 +519,7 @@ const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardClientsRoute: DashboardClientsRoute,
   DashboardNotificationsRoute: DashboardNotificationsRoute,
   DashboardSettingsRoute: DashboardSettingsRoute,
+  DashboardSocialCampaignsRoute: DashboardSocialCampaignsRoute,
   DashboardIndexRoute: DashboardIndexRoute,
 }
 
