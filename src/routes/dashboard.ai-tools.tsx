@@ -29,6 +29,14 @@ const tools: Tool[] = [
     internal: true,
   },
   {
+    name: "Générateur d'images SmartCom",
+    description: "Créez vos visuels publicitaires (affiches, posts Facebook/Instagram, bannières WhatsApp) à partir d'une description. Intégré, gratuit.",
+    url: "/dashboard/image-generator",
+    category: "Intégré",
+    icon: ImageIcon,
+    internal: true,
+  },
+  {
     name: "ChatGPT",
     description: "Génération de textes publicitaires, e-mails, posts réseaux sociaux et réponses clients.",
     url: "https://chat.openai.com",
