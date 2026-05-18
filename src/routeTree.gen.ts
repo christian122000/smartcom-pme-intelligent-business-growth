@@ -19,6 +19,7 @@ import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as DashboardSocialCampaignsRouteImport } from './routes/dashboard.social-campaigns'
 import { Route as DashboardSettingsRouteImport } from './routes/dashboard.settings'
 import { Route as DashboardNotificationsRouteImport } from './routes/dashboard.notifications'
+import { Route as DashboardImageGeneratorRouteImport } from './routes/dashboard.image-generator'
 import { Route as DashboardClientsRouteImport } from './routes/dashboard.clients'
 import { Route as DashboardChatbotRouteImport } from './routes/dashboard.chatbot'
 import { Route as DashboardCampaignsRouteImport } from './routes/dashboard.campaigns'
@@ -82,6 +83,11 @@ const DashboardSettingsRoute = DashboardSettingsRouteImport.update({
 const DashboardNotificationsRoute = DashboardNotificationsRouteImport.update({
   id: '/notifications',
   path: '/notifications',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardImageGeneratorRoute = DashboardImageGeneratorRouteImport.update({
+  id: '/image-generator',
+  path: '/image-generator',
   getParentRoute: () => DashboardRoute,
 } as any)
 const DashboardClientsRoute = DashboardClientsRouteImport.update({
@@ -169,6 +175,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/campaigns': typeof DashboardCampaignsRoute
   '/dashboard/chatbot': typeof DashboardChatbotRoute
   '/dashboard/clients': typeof DashboardClientsRoute
+  '/dashboard/image-generator': typeof DashboardImageGeneratorRoute
   '/dashboard/notifications': typeof DashboardNotificationsRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/social-campaigns': typeof DashboardSocialCampaignsRoute
@@ -192,6 +199,7 @@ export interface FileRoutesByTo {
   '/dashboard/campaigns': typeof DashboardCampaignsRoute
   '/dashboard/chatbot': typeof DashboardChatbotRoute
   '/dashboard/clients': typeof DashboardClientsRoute
+  '/dashboard/image-generator': typeof DashboardImageGeneratorRoute
   '/dashboard/notifications': typeof DashboardNotificationsRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/social-campaigns': typeof DashboardSocialCampaignsRoute
@@ -218,6 +226,7 @@ export interface FileRoutesById {
   '/dashboard/campaigns': typeof DashboardCampaignsRoute
   '/dashboard/chatbot': typeof DashboardChatbotRoute
   '/dashboard/clients': typeof DashboardClientsRoute
+  '/dashboard/image-generator': typeof DashboardImageGeneratorRoute
   '/dashboard/notifications': typeof DashboardNotificationsRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/social-campaigns': typeof DashboardSocialCampaignsRoute
@@ -245,6 +254,7 @@ export interface FileRouteTypes {
     | '/dashboard/campaigns'
     | '/dashboard/chatbot'
     | '/dashboard/clients'
+    | '/dashboard/image-generator'
     | '/dashboard/notifications'
     | '/dashboard/settings'
     | '/dashboard/social-campaigns'
@@ -268,6 +278,7 @@ export interface FileRouteTypes {
     | '/dashboard/campaigns'
     | '/dashboard/chatbot'
     | '/dashboard/clients'
+    | '/dashboard/image-generator'
     | '/dashboard/notifications'
     | '/dashboard/settings'
     | '/dashboard/social-campaigns'
@@ -293,6 +304,7 @@ export interface FileRouteTypes {
     | '/dashboard/campaigns'
     | '/dashboard/chatbot'
     | '/dashboard/clients'
+    | '/dashboard/image-generator'
     | '/dashboard/notifications'
     | '/dashboard/settings'
     | '/dashboard/social-campaigns'
@@ -379,6 +391,13 @@ declare module '@tanstack/react-router' {
       path: '/notifications'
       fullPath: '/dashboard/notifications'
       preLoaderRoute: typeof DashboardNotificationsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/image-generator': {
+      id: '/dashboard/image-generator'
+      path: '/image-generator'
+      fullPath: '/dashboard/image-generator'
+      preLoaderRoute: typeof DashboardImageGeneratorRouteImport
       parentRoute: typeof DashboardRoute
     }
     '/dashboard/clients': {
@@ -505,6 +524,7 @@ interface DashboardRouteChildren {
   DashboardCampaignsRoute: typeof DashboardCampaignsRoute
   DashboardChatbotRoute: typeof DashboardChatbotRoute
   DashboardClientsRoute: typeof DashboardClientsRoute
+  DashboardImageGeneratorRoute: typeof DashboardImageGeneratorRoute
   DashboardNotificationsRoute: typeof DashboardNotificationsRoute
   DashboardSettingsRoute: typeof DashboardSettingsRoute
   DashboardSocialCampaignsRoute: typeof DashboardSocialCampaignsRoute
@@ -517,6 +537,7 @@ const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardCampaignsRoute: DashboardCampaignsRoute,
   DashboardChatbotRoute: DashboardChatbotRoute,
   DashboardClientsRoute: DashboardClientsRoute,
+  DashboardImageGeneratorRoute: DashboardImageGeneratorRoute,
   DashboardNotificationsRoute: DashboardNotificationsRoute,
   DashboardSettingsRoute: DashboardSettingsRoute,
   DashboardSocialCampaignsRoute: DashboardSocialCampaignsRoute,
