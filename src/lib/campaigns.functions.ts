@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
+import nodemailer from "nodemailer";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 const SendInput = z.object({
@@ -27,8 +28,19 @@ export const sendCampaign = createServerFn({ method: "POST" })
     if (rErr) throw new Error(rErr.message);
     if (!recipients?.length) throw new Error("Aucun destinataire en attente");
 
-    const apiKey = process.env.RESEND_API_KEY;
-    const fromAddr = process.env.RESEND_FROM || "SmartCom PME <onboarding@resend.dev>";
+    const gmailUser = process.env.GMAIL_USER;
+    const gmailPass = process.env.GMAIL_APP_PASSWORD?.replace(/\s+/g, "");
+    const fromName = process.env.GMAIL_FROM_NAME || "SmartCom PME";
+
+    let transporter: nodemailer.Transporter | null = null;
+    if (gmailUser && gmailPass) {
+      transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true,
+        auth: { user: gmailUser, pass: gmailPass },
+      });
+    }
 
     let sent = 0;
     let failed = 0;
@@ -37,38 +49,27 @@ export const sendCampaign = createServerFn({ method: "POST" })
       let status = "sent";
       let error: string | null = null;
 
-      if (apiKey) {
+      if (transporter && gmailUser) {
         try {
-          const res = await fetch("https://api.resend.com/emails", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${apiKey}`,
-            },
-            body: JSON.stringify({
-              from: fromAddr,
-              to: [r.email],
-              subject: campaign.subject || campaign.name,
-              html: `<div style="font-family:Arial,sans-serif;max-width:560px;margin:auto;padding:24px;background:#fff;color:#111">
-                <h2 style="color:#4f46e5;margin:0 0 12px">${campaign.name}</h2>
-                <div style="white-space:pre-wrap;font-size:15px;line-height:1.5">${(campaign.message || "").replace(/</g, "&lt;")}</div>
-                <hr style="margin:24px 0;border:none;border-top:1px solid #eee" />
-                <p style="font-size:12px;color:#888">Envoyé via SmartCom PME</p>
-              </div>`,
-            }),
+          await transporter.sendMail({
+            from: `"${fromName}" <${gmailUser}>`,
+            to: r.email,
+            subject: campaign.subject || campaign.name,
+            html: `<div style="font-family:Arial,sans-serif;max-width:560px;margin:auto;padding:24px;background:#fff;color:#111">
+              <h2 style="color:#4f46e5;margin:0 0 12px">${campaign.name}</h2>
+              <div style="white-space:pre-wrap;font-size:15px;line-height:1.5">${(campaign.message || "").replace(/</g, "&lt;")}</div>
+              <hr style="margin:24px 0;border:none;border-top:1px solid #eee" />
+              <p style="font-size:12px;color:#888">Envoyé via SmartCom PME</p>
+            </div>`,
           });
-          if (!res.ok) {
-            status = "failed";
-            error = (await res.text()).slice(0, 300);
-            failed++;
-          } else sent++;
+          sent++;
         } catch (e: any) {
           status = "failed";
           error = String(e?.message ?? e).slice(0, 300);
           failed++;
         }
       } else {
-        // Mode démo: simulate
+        // Mode démo: simulation
         sent++;
       }
 
@@ -87,5 +88,5 @@ export const sendCampaign = createServerFn({ method: "POST" })
       })
       .eq("id", campaign.id);
 
-    return { sent, failed, simulated: !apiKey };
+    return { sent, failed, simulated: !transporter };
   });
