@@ -6,7 +6,7 @@ import { Sparkles, Download, Loader2, ImageIcon } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { toast } from "@/components/ui/sonner";
+import { toast } from "sonner";
 import { generateImage } from "@/lib/image-gen.functions";
 
 export const Route = createFileRoute("/dashboard/image-generator")({
