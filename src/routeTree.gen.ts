@@ -25,6 +25,7 @@ import { Route as DashboardChatbotRouteImport } from './routes/dashboard.chatbot
 import { Route as DashboardCampaignsRouteImport } from './routes/dashboard.campaigns'
 import { Route as DashboardAnalyticsRouteImport } from './routes/dashboard.analytics'
 import { Route as DashboardAiToolsRouteImport } from './routes/dashboard.ai-tools'
+import { Route as DashboardAiInsightsRouteImport } from './routes/dashboard.ai-insights'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
@@ -115,6 +116,11 @@ const DashboardAiToolsRoute = DashboardAiToolsRouteImport.update({
   path: '/ai-tools',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardAiInsightsRoute = DashboardAiInsightsRouteImport.update({
+  id: '/ai-insights',
+  path: '/ai-insights',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const ApiChatRoute = ApiChatRouteImport.update({
   id: '/api/chat',
   path: '/api/chat',
@@ -170,6 +176,7 @@ export interface FileRoutesByFullPath {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/api/chat': typeof ApiChatRoute
+  '/dashboard/ai-insights': typeof DashboardAiInsightsRoute
   '/dashboard/ai-tools': typeof DashboardAiToolsRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/campaigns': typeof DashboardCampaignsRoute
@@ -194,6 +201,7 @@ export interface FileRoutesByTo {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/api/chat': typeof ApiChatRoute
+  '/dashboard/ai-insights': typeof DashboardAiInsightsRoute
   '/dashboard/ai-tools': typeof DashboardAiToolsRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/campaigns': typeof DashboardCampaignsRoute
@@ -221,6 +229,7 @@ export interface FileRoutesById {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/api/chat': typeof ApiChatRoute
+  '/dashboard/ai-insights': typeof DashboardAiInsightsRoute
   '/dashboard/ai-tools': typeof DashboardAiToolsRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/campaigns': typeof DashboardCampaignsRoute
@@ -249,6 +258,7 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/users'
     | '/api/chat'
+    | '/dashboard/ai-insights'
     | '/dashboard/ai-tools'
     | '/dashboard/analytics'
     | '/dashboard/campaigns'
@@ -273,6 +283,7 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/users'
     | '/api/chat'
+    | '/dashboard/ai-insights'
     | '/dashboard/ai-tools'
     | '/dashboard/analytics'
     | '/dashboard/campaigns'
@@ -299,6 +310,7 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/users'
     | '/api/chat'
+    | '/dashboard/ai-insights'
     | '/dashboard/ai-tools'
     | '/dashboard/analytics'
     | '/dashboard/campaigns'
@@ -435,6 +447,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardAiToolsRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/ai-insights': {
+      id: '/dashboard/ai-insights'
+      path: '/ai-insights'
+      fullPath: '/dashboard/ai-insights'
+      preLoaderRoute: typeof DashboardAiInsightsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/api/chat': {
       id: '/api/chat'
       path: '/api/chat'
@@ -519,6 +538,7 @@ const AdminRouteChildren: AdminRouteChildren = {
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface DashboardRouteChildren {
+  DashboardAiInsightsRoute: typeof DashboardAiInsightsRoute
   DashboardAiToolsRoute: typeof DashboardAiToolsRoute
   DashboardAnalyticsRoute: typeof DashboardAnalyticsRoute
   DashboardCampaignsRoute: typeof DashboardCampaignsRoute
@@ -532,6 +552,7 @@ interface DashboardRouteChildren {
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardAiInsightsRoute: DashboardAiInsightsRoute,
   DashboardAiToolsRoute: DashboardAiToolsRoute,
   DashboardAnalyticsRoute: DashboardAnalyticsRoute,
   DashboardCampaignsRoute: DashboardCampaignsRoute,
