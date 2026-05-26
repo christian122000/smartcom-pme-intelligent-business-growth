@@ -74,14 +74,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "SmartCom pme" },
+      { name: "description", content: "SmartCom PME is an intelligent web application designed to boost business growth for SMEs." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "SmartCom pme" },
+      { property: "og:description", content: "SmartCom PME is an intelligent web application designed to boost business growth for SMEs." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "SmartCom pme" },
+      { name: "twitter:description", content: "SmartCom PME is an intelligent web application designed to boost business growth for SMEs." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c1bdc4e8-64fb-4b37-ac66-29e1a0a1ef76/id-preview-5ebf062c--bceac244-b4d4-44eb-9da0-18b0e6d3c7b7.lovable.app-1779158221870.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c1bdc4e8-64fb-4b37-ac66-29e1a0a1ef76/id-preview-5ebf062c--bceac244-b4d4-44eb-9da0-18b0e6d3c7b7.lovable.app-1779158221870.png" },
     ],
     links: [
       {
